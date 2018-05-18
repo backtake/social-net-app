@@ -18,4 +18,14 @@ public class UserServiceImpl implements UserService {
     public Iterable<User> findAll() {
         return this.userRepository.findAll();
     }
+
+    @Override
+    public void save(User user) {
+
+        if(this.userRepository.findUserByName(user.getName()) == null) {
+            this.userRepository.save(user);
+        } else {
+            throw new IllegalArgumentException();
+        }
+    }
 }

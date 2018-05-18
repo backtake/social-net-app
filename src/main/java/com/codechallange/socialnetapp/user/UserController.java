@@ -1,9 +1,7 @@
 package com.codechallange.socialnetapp.user;
 
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(path = "/user")
@@ -18,5 +16,11 @@ public class UserController {
     @GetMapping(path = "")
     public Iterable<User> index() {
         return this.service.findAll();
+    }
+
+    @PostMapping(path = "")
+    public User create(@RequestBody User user) {
+        this.service.save(user);
+        return user;
     }
 }
