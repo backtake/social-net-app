@@ -8,4 +8,5 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     Iterable<User> findAll();
     User findUserByName(String name);
+    User findUserById(Long id);
 }

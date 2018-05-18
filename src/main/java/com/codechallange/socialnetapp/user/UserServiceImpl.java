@@ -1,5 +1,6 @@
 package com.codechallange.socialnetapp.user;
 
+import com.codechallange.socialnetapp.twit.Twit;
 import com.codechallange.socialnetapp.twit.TwitRepository;
 import org.springframework.stereotype.Service;
 
@@ -27,5 +28,10 @@ public class UserServiceImpl implements UserService {
         } else {
             throw new IllegalArgumentException();
         }
+    }
+
+    @Override
+    public Iterable<Twit> getUserWall(Long id) {
+        return this.twitRepository.findAllByUser(this.userRepository.findUserById(id));
     }
 }

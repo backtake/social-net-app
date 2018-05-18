@@ -1,6 +1,7 @@
 package com.codechallange.socialnetapp.user;
 
 
+import com.codechallange.socialnetapp.twit.Twit;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -22,5 +23,10 @@ public class UserController {
     public User create(@RequestBody User user) {
         this.service.save(user);
         return user;
+    }
+
+    @GetMapping(path = "/{id}")
+    public Iterable<Twit> showUserWall(@PathVariable Long id) {
+        return this.service.getUserWall(id);
     }
 }
