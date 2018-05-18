@@ -34,4 +34,11 @@ public class UserServiceImpl implements UserService {
     public Iterable<Twit> getUserWall(Long id) {
         return this.twitRepository.findAllByUser(this.userRepository.findUserById(id));
     }
+
+    @Override
+    public void postMessage(Long userId, Twit twit) {
+        User user = this.userRepository.findUserById(userId);
+        twit.setUser(user);
+        this.twitRepository.save(twit);
+    }
 }

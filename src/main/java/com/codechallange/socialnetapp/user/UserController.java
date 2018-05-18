@@ -29,4 +29,10 @@ public class UserController {
     public Iterable<Twit> showUserWall(@PathVariable Long id) {
         return this.service.getUserWall(id);
     }
+
+    @PostMapping(path = "/{id}")
+    public Twit twitMessage(@PathVariable Long id, @RequestBody Twit twit) {
+        this.service.postMessage(id, twit);
+        return twit;
+    }
 }

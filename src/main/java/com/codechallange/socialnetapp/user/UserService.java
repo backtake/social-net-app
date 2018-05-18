@@ -7,4 +7,5 @@ public interface UserService {
     Iterable<User> findAll();
     void save(User user);
     Iterable<Twit> getUserWall(Long id);
+    void postMessage(Long userId, Twit twit);
 }
