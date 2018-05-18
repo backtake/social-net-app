@@ -3,7 +3,6 @@ package com.codechallange.socialnetapp.twit;
 import com.codechallange.socialnetapp.user.User;
 
 import javax.persistence.*;
-import java.util.Calendar;
 
 @Entity
 public class Twit {
@@ -11,8 +10,6 @@ public class Twit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Temporal(TemporalType.DATE)
-    private Calendar date;
     private String message;
 
     @ManyToOne
@@ -21,9 +18,19 @@ public class Twit {
 
     protected Twit() {}
 
-    public Twit(Calendar date, String message, User user) {
-        this.date = date;
-        this.message = message;
+    public Twit(String message) {
+        setMessage(message);
+    }
+
+    public void setUser(User user) {
         this.user = user;
+    }
+
+    private void setMessage(String message){
+        if(message.length()<=140) {
+            this.message = message;
+        } else {
+            throw new IllegalArgumentException("Your message is too big");
+        }
     }
 }
