@@ -15,6 +15,12 @@ public class Twit {
     @ManyToOne
     private User user;
 
+    protected Twit() {}
+
+    public Twit(String message) {
+        setMessage(message);
+    }
+
     public void setUser(User user) {
         this.user = user;
     }

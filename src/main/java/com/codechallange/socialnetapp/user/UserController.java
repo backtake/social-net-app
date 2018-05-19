@@ -4,6 +4,8 @@ package com.codechallange.socialnetapp.user;
 import com.codechallange.socialnetapp.twit.Twit;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Set;
+
 @RestController
 @RequestMapping(path = "/user")
 public class UserController {
@@ -34,5 +36,16 @@ public class UserController {
     public Twit twitMessage(@RequestBody Twit twit) {
         this.service.postMessage(twit);
         return twit;
+    }
+
+    @GetMapping(path = "/{id}/followed")
+    public Iterable<Twit> showTimeline(@PathVariable Long id) {
+        return this.service.getTimeline(id);
+    }
+
+    @PutMapping(path = "/{id}/followed/{toBeFollowedId}")
+    public User addToFollowed(@PathVariable Long id, @PathVariable Long toBeFollowedId) {
+        this.service.addUserToFollowed(id, toBeFollowedId);
+        return this.service.findOne(id);
     }
 }

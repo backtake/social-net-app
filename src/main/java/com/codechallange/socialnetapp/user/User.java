@@ -11,8 +11,17 @@ public class User {
     private Long id;
     private String name;
 
-    @OneToMany
+    @ManyToMany
+    @JoinTable(name = "followed_by_user",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "followed_id"))
     private Set<User> followed;
+
+    protected User() {}
+
+    public User(String name) {
+        this.name = name;
+    }
 
     public void setName(String name) {
         this.name = name;

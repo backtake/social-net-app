@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -44,5 +45,40 @@ public class UserServiceImpl implements UserService {
     @Override
     public void postMessage(Twit twit) {
         this.twitRepository.save(twit);
+    }
+
+    @Override
+    public Set<User> findAllFollowedByUser(Long id) {
+        User user = this.userRepository.findUserById(id);
+        Set<User> followed = user.getFollowed();
+        return followed;
+    }
+
+    @Override
+    public void addUserToFollowed(Long id, Long toBeFollowedId) {
+        User user = this.userRepository.findUserById(id);
+        User userToBeFollowed = this.userRepository.findUserById(toBeFollowedId);
+        Set<User> followed = user.getFollowed();
+        followed.add(userToBeFollowed);
+        this.userRepository.save(user);
+    }
+
+    @Override
+    public User findOne(Long id) {
+        return this.userRepository.findUserById(id);
+    }
+
+    @Override
+    public Iterable<Twit> getTimeline(Long id) {
+        Set<User> followed = findAllFollowedByUser(id);
+        return getAllTwitsOfFollowed(followed);
+    }
+
+    private List<Twit> getAllTwitsOfFollowed(Set<User> followed) {
+        List<Twit> timeline = new ArrayList<>();
+        for (User user: followed) {
+            timeline.addAll(this.twitRepository.findAllByUser(user));
+        }
+        return timeline;
     }
 }
