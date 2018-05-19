@@ -1,9 +1,13 @@
 package com.codechallange.socialnetapp.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Table(name = "users")
 public class User {
 
     @Id
@@ -11,11 +15,12 @@ public class User {
     private Long id;
     private String name;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JsonIgnore
     @JoinTable(name = "followed_by_user",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "followed_id"))
-    private Set<User> followed;
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "followed_id")})
+    private Set<User> followed = new HashSet<>();
 
     protected User() {}
 
