@@ -5,6 +5,7 @@ import com.codechallange.socialnetapp.user.User;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "twits")
 public class Twit implements Comparable<Twit> {
 
     @Id
