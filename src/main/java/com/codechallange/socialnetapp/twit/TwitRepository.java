@@ -4,8 +4,9 @@ import com.codechallange.socialnetapp.user.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface TwitRepository extends CrudRepository<Twit, Long> {
-
-    Iterable<Twit> findAllByUser(User user);
+    List<Twit> findAllByUser(User user);
 }

@@ -4,6 +4,10 @@ import com.codechallange.socialnetapp.twit.Twit;
 import com.codechallange.socialnetapp.twit.TwitRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -26,19 +30,19 @@ public class UserServiceImpl implements UserService {
         if(this.userRepository.findUserByName(user.getName()) == null) {
             this.userRepository.save(user);
         } else {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("User with that name already exists");
         }
     }
 
     @Override
-    public Iterable<Twit> getUserWall(Long id) {
-        return this.twitRepository.findAllByUser(this.userRepository.findUserById(id));
+    public List<Twit> getUserWall(Long id) {
+        List<Twit> twits = this.twitRepository.findAllByUser(this.userRepository.findUserById(id));
+        Collections.reverse(twits);
+        return twits;
     }
 
     @Override
-    public void postMessage(Long userId, Twit twit) {
-        User user = this.userRepository.findUserById(userId);
-        twit.setUser(user);
+    public void postMessage(Twit twit) {
         this.twitRepository.save(twit);
     }
 }

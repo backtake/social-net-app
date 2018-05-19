@@ -31,8 +31,8 @@ public class UserController {
     }
 
     @PostMapping(path = "/{id}")
-    public Twit twitMessage(@PathVariable Long id, @RequestBody Twit twit) {
-        this.service.postMessage(id, twit);
+    public Twit twitMessage(@RequestBody Twit twit) {
+        this.service.postMessage(twit);
         return twit;
     }
 }

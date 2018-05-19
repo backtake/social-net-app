@@ -13,24 +13,33 @@ public class Twit {
     private String message;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
     private User user;
-
-    protected Twit() {}
-
-    public Twit(String message) {
-        setMessage(message);
-    }
 
     public void setUser(User user) {
         this.user = user;
     }
 
-    private void setMessage(String message){
+    public User getUser() {
+        return this.user;
+    }
+
+    public void setMessage(String message){
         if(message.length()<=140) {
             this.message = message;
         } else {
             throw new IllegalArgumentException("Your message is too big");
         }
+    }
+
+    public String getMessage() {
+        return this.message;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
