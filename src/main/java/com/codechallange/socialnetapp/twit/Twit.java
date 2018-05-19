@@ -5,7 +5,7 @@ import com.codechallange.socialnetapp.user.User;
 import javax.persistence.*;
 
 @Entity
-public class Twit {
+public class Twit implements Comparable<Twit> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -47,5 +47,11 @@ public class Twit {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    @Override
+    public int compareTo(Twit compareTwit) {
+        Long compareId = ((Twit) compareTwit).getId();
+        return (int) (compareId - this.getId());
     }
 }

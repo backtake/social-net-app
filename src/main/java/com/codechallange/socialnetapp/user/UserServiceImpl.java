@@ -38,7 +38,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<Twit> getUserWall(Long id) {
         List<Twit> twits = this.twitRepository.findAllByUser(this.userRepository.findUserById(id));
-        Collections.reverse(twits);
+        Collections.sort(twits);
         return twits;
     }
 
@@ -79,6 +79,7 @@ public class UserServiceImpl implements UserService {
         for (User user: followed) {
             timeline.addAll(this.twitRepository.findAllByUser(user));
         }
+        Collections.sort(timeline);
         return timeline;
     }
 }
