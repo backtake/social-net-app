@@ -42,12 +42,15 @@ public class SocialNetAppApplication {
             twitRepository.save(twit2);
             twitRepository.save(twit3);
             twitRepository.save(twit4);
-            Set<User> followed = new HashSet<>();
-            followed.add(user2);
-            followed.add(user3);
-            user1.setFollowed(followed);
+            Set<User> followed1 = new HashSet<>();
+            followed1.add(user2);
+            followed1.add(user3);
+            user1.setFollowed(followed1);
             userRepository.save(user1);
-
+            Set<User> followed2 = new HashSet<>();
+            followed2.add(user1);
+            user2.setFollowed(followed2);
+            userRepository.save(user2);
         };
     }
 }
