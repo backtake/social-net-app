@@ -18,6 +18,11 @@ The application supports the scenarios below.
 
 # how to run it?
 
--  build a jar file using: mvn package
-
--  run it with: java -jar target/social-net-app-0.0.1-SNAPSHOT.jar
+-  build a jar file using:
+```
+mvn package
+```
+-  run it with: 
+```
+java -jar target/social-net-app-0.0.1-SNAPSHOT.jar
+```
