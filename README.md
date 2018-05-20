@@ -7,7 +7,7 @@ The application supports the scenarios below.
 
 -  **path ="/user" method POST** - creates a user
 
--  **path ="/user/{id}" method **GET** - get all messages posted by user in reverse chronological order
+-  **path ="/user/{id}" method GET** - get all messages posted by user in reverse chronological order
 
 -  **path ="/user/{id}" method POST** - post a 140 character message
 
